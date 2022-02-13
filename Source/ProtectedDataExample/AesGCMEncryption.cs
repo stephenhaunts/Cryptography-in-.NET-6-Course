@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,6 @@ namespace Pluralsight.Symmetric;
 
 public class AesGcmEncryption
 {
-    public static byte[] GenerateRandomNumber(int length)
-    {
-        return RandomNumberGenerator.GetBytes(32);
-    }
-
     public static (byte[], byte[]) Encrypt(byte[] dataToEncrypt, byte[] key, byte[] nonce, byte[] associatedData)
     {
         // these will be filled during the encryption

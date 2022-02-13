@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ SOFTWARE.
 
 using Pluralsight.Symmetric;
 
-//TestAesGCM();
+TestAesGCM();
 
 Console.WriteLine();
 Console.WriteLine();
@@ -66,8 +66,9 @@ static void TestAesGCM()
     {
         (byte[] ciphereText, byte[] tag) result = AesGcmEncryption.Encrypt(Encoding.UTF8.GetBytes(original), gcmKey,
             nonce, Encoding.UTF8.GetBytes("some metadata"));
-        byte[] decryptedText = AesGcmEncryption.Decrypt(result.ciphereText, gcmKey, nonce, result.tag,
-            Encoding.UTF8.GetBytes("some metadata"));
+        
+        byte[] decryptedText = AesGcmEncryption.Decrypt(result.ciphereText, gcmKey, 
+            nonce, result.tag, Encoding.UTF8.GetBytes("some metadata"));
 
         Console.WriteLine("AES GCM Encryption Demonstration in .NET");
         Console.WriteLine("----------------------------------------");

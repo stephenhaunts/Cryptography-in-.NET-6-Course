@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -26,11 +26,11 @@ namespace Pluralsight.Asymmetric;
 
 internal class NewRSA
 {
-    private readonly System.Security.Cryptography.RSA _rsa; 
+    private readonly RSA _rsa; 
  
     public NewRSA()
     {
-        _rsa = System.Security.Cryptography.RSA.Create(2048);
+        _rsa = RSA.Create(2048);
     }
 
     public byte[] Encrypt(string dataToEncrypt)

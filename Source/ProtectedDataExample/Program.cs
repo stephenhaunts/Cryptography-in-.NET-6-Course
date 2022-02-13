@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -39,12 +39,12 @@ static class Program
         Console.WriteLine($"Original Text = {original}");
 
         // Create a key and nonce. Encrypt our text with AES/
-        var gcmKey = AesGcmEncryption.GenerateRandomNumber(32);
-        var nonce = AesGcmEncryption.GenerateRandomNumber(12);
+        var gcmKey = RandomNumberGenerator.GetBytes(32);
+        var nonce = RandomNumberGenerator.GetBytes(12);
         var result = EncryptText(original, gcmKey, nonce);
 
         // Create some entropy and protect the AES key.
-        var entropy = AesGcmEncryption.GenerateRandomNumber(16);
+        var entropy = RandomNumberGenerator.GetBytes(16);
         var protectedKey = Protected.Protect(gcmKey, entropy, DataProtectionScope.CurrentUser);
 
         // Decrypt the text with AES. First the AES key has to be retrieved with DPAPI.
@@ -67,7 +67,9 @@ static class Program
         
     private static void ProtectedDataTest()
     {
-        var encrypted = Protected.Protect("Mary had a little lamb", "8wef5juy2389f4", DataProtectionScope.CurrentUser);
+        var encrypted = Protected.Protect("Mary had a little lamb", "8wef5juy2389f4", 
+            DataProtectionScope.CurrentUser);
+
         Console.WriteLine(encrypted);
 
         var decrypted = Protected.Unprotect(encrypted, "8wef5juy2389f4", DataProtectionScope.CurrentUser);

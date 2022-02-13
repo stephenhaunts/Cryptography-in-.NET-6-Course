@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,14 +28,14 @@ public static class TripleDesEncryption
 {
     public static byte[] Encrypt(byte[] dataToEncrypt, byte[] key, byte[] iv)
     {
-        using var des = System.Security.Cryptography.TripleDES.Create();
+        using var des = TripleDES.Create();
         des.Key = key;
         return des.EncryptCbc(dataToEncrypt, iv);
     }
 
     public static byte[] Decrypt(byte[] dataToDecrypt, byte[] key, byte[] iv)
     {
-        using var des = System.Security.Cryptography.TripleDES.Create();
+        using var des = TripleDES.Create();
         des.Key = key;
         return des.DecryptCbc(dataToDecrypt, iv);
     }

@@ -1,7 +1,7 @@
 ﻿/*
 MIT License
 
-Copyright (c) 2021
+Copyright (c) 2022
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,10 +28,9 @@ var key = RandomNumberGenerator.GetBytes(16);
 
 var iv = RandomNumberGenerator.GetBytes(8);
 const string original = "Text to encrypt";
-const string original2 = "Text to encrypt2";
 
 var encrypted =  TripleDesEncryption.Encrypt(Encoding.UTF8.GetBytes(original), key, iv);
-var encrypted2 = TripleDesEncryption.Encrypt(Encoding.UTF8.GetBytes(original2), key, iv);
+
 var decrypted =  TripleDesEncryption.Decrypt(encrypted, key, iv);
 
 var decryptedMessage = Encoding.UTF8.GetString(decrypted);
@@ -41,7 +40,6 @@ Console.WriteLine("--------------------------------------------");
 Console.WriteLine();
 Console.WriteLine("Original Text = " + original);
 Console.WriteLine("Encrypted Text = " + Convert.ToBase64String(encrypted));
-Console.WriteLine("Encrypted Text = " + Convert.ToBase64String(encrypted2));
 Console.WriteLine("Decrypted Text = " + decryptedMessage);
 
 Console.ReadLine();
