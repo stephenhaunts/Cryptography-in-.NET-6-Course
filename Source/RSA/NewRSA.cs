@@ -50,8 +50,11 @@ internal class NewRSA
 
     public byte[] ExportPrivateKey(int numberOfIterations, string password)
     {
-        var keyParams = new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, numberOfIterations);  
-        var encryptedPrivateKey = _rsa.ExportEncryptedPkcs8PrivateKey(Encoding.UTF8.GetBytes(password), keyParams);
+        var keyParams = new PbeParameters(
+            PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, numberOfIterations);
+        
+        var encryptedPrivateKey = _rsa.ExportEncryptedPkcs8PrivateKey(
+            Encoding.UTF8.GetBytes(password), keyParams);
 
         return encryptedPrivateKey;
     }

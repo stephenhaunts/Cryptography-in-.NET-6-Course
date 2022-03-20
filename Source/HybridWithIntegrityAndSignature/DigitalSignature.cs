@@ -41,7 +41,8 @@ public class DigitalSignature
         using var rsa = RSA.Create();
         rsa.ImportParameters(_privateKey);
 
-        return rsa.SignHash(hashOfDataToSign, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        return rsa.SignHash(hashOfDataToSign, 
+            HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
     }
 
     public bool VerifySignature(byte[] hashOfDataToSign, byte[] signature)
@@ -49,6 +50,7 @@ public class DigitalSignature
         using var rsa = RSA.Create();
         rsa.ImportParameters(_publicKey);
 
-        return rsa.VerifyHash(hashOfDataToSign, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+        return rsa.VerifyHash(hashOfDataToSign, signature, 
+            HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
     }
 }

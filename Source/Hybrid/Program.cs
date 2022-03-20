@@ -26,9 +26,7 @@ using Pluralsight.Hybrid;
 
 const string original = "Very secret and important information that can not fall into the wrong hands.";
 
-var rsaParams = new RsaEncryption();
-rsaParams.AssignNewKey();
-
+var rsaParams = new NewRSA();
 
 var encryptedBlock = HybridEncryption.EncryptData(Encoding.UTF8.GetBytes(original), rsaParams);
 var decrypted = HybridEncryption.DecryptData(encryptedBlock, rsaParams);

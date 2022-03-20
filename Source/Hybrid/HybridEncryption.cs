@@ -26,7 +26,7 @@ namespace Pluralsight.Hybrid;
 
 public class HybridEncryption
 {
-    public static EncryptedPacket EncryptData(byte[] original, RsaEncryption rsaParams)
+    public static EncryptedPacket EncryptData(byte[] original, NewRSA rsaParams)
     {
         // Generate our session key.
         var sessionKey = RandomNumberGenerator.GetBytes(32);
@@ -38,15 +38,15 @@ public class HybridEncryption
         encryptedPacket.EncryptedData = AesEncryption.Encrypt(original, sessionKey, encryptedPacket.Iv);
 
         // Encrypt the session key with RSA
-        encryptedPacket.EncryptedSessionKey = rsaParams.EncryptData(sessionKey);
+        encryptedPacket.EncryptedSessionKey = rsaParams.Encrypt(sessionKey);
 
         return encryptedPacket;
     }
 
-    public static byte[] DecryptData(EncryptedPacket encryptedPacket, RsaEncryption rsaParams)
+    public static byte[] DecryptData(EncryptedPacket encryptedPacket, NewRSA rsaParams)
     {
         // Decrypt AES Key with RSA.
-        var decryptedSessionKey = rsaParams.DecryptData(encryptedPacket.EncryptedSessionKey);
+        var decryptedSessionKey = rsaParams.Decrypt(encryptedPacket.EncryptedSessionKey);
 
         // Decrypt our data with  AES using the decrypted session key.
         var decryptedData = AesEncryption.Decrypt(encryptedPacket.EncryptedData,

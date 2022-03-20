@@ -33,12 +33,14 @@ public static class HybridEncryption
 
         var encryptedPacket = new EncryptedPacket { Iv = RandomNumberGenerator.GetBytes(16) };
 
-        encryptedPacket.EncryptedData = AesEncryption.Encrypt(original, sessionKey, encryptedPacket.Iv);
+        encryptedPacket.EncryptedData = 
+            AesEncryption.Encrypt(original, sessionKey, encryptedPacket.Iv);
 
         encryptedPacket.EncryptedSessionKey = rsaParams.EncryptData(sessionKey);
 
         using var hmac = new HMACSHA256(sessionKey);
-        encryptedPacket.Hmac = hmac.ComputeHash(Combine(encryptedPacket.EncryptedData, encryptedPacket.Iv));
+        encryptedPacket.Hmac = 
+            hmac.ComputeHash(Combine(encryptedPacket.EncryptedData, encryptedPacket.Iv));
 
         encryptedPacket.Signature = digitalSignature.SignData(encryptedPacket.Hmac);
 

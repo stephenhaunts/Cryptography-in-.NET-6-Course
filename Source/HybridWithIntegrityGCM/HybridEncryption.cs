@@ -33,7 +33,8 @@ public class HybridEncryption
 
         var encryptedPacket = new EncryptedPacket { Nonce = RandomNumberGenerator.GetBytes(12) };
 
-        (byte[] ciphereText, byte[] tag) encrypted = AesGCMEncryption.Encrypt(original, sessionKey, encryptedPacket.Nonce, null);
+        (byte[] ciphereText, byte[] tag) encrypted = 
+            AesGCMEncryption.Encrypt(original, sessionKey, encryptedPacket.Nonce, null);
 
         encryptedPacket.EncryptedData = encrypted.ciphereText;
         encryptedPacket.Tag = encrypted.tag;

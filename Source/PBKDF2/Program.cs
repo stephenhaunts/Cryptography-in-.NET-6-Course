@@ -39,6 +39,10 @@ HashPassword(passwordToHash, 50000);
 HashPassword(passwordToHash, 100000);
 HashPassword(passwordToHash, 200000);
 HashPassword(passwordToHash, 500000);
+HashPassword(passwordToHash, 1000000);
+HashPassword(passwordToHash, 1500000);
+HashPassword(passwordToHash, 2000000);
+HashPassword(passwordToHash, 3000000);
 
 Console.ReadLine();
 
@@ -47,8 +51,12 @@ static void HashPassword(string passwordToHash, int numberOfRounds)
 {
     var sw = Stopwatch.StartNew();
 
-    var hashedPassword = Rfc2898DeriveBytes.Pbkdf2(passwordToHash, RandomNumberGenerator.GetBytes(32),
-        numberOfRounds, HashAlgorithmName.SHA256, 20);
+    var hashedPassword = Rfc2898DeriveBytes.Pbkdf2(
+                            passwordToHash, 
+                            RandomNumberGenerator.GetBytes(32),
+                            numberOfRounds, 
+                            HashAlgorithmName.SHA256, 
+                            32);
 
     sw.Stop();
 
